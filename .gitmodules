@@ -1,0 +1,3 @@
+[submodule "resources/asu-unity-stack"]
+	path = resources/asu-unity-stack
+	url = https://github.com/ASU-KE/asu-unity-stack
