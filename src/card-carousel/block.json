@@ -1,0 +1,34 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "unity-carousels/card-carousel",
+	"version": "0.1.0",
+	"title": "Card Carousel",
+	"category": "unity-carousels",
+	"icon": "smiley",
+	"description": "Carousel build off of the card component, to group related content together when all content isn't critical for the viewer to see all content options at once.",
+	"example": {},
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"textdomain": "unity-carousels",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js",
+	"attributes": {
+		"perView": {
+			"type": "string",
+			"default": "2"
+		},
+		"cardItems": {
+			"type": "array",
+			"default": []
+		},
+		"maxWidth": {
+			"type": "string",
+			"default": "1000px"
+		}
+	}
+}
