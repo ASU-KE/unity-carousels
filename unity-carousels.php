@@ -43,3 +43,6 @@ function unitycarousels_register_block_category($categories)
 	return $categories;
 }
 add_filter('block_categories_all', 'unitycarousels_register_block_category');
+
+wp_enqueue_script( 'unity-carousels-glidejs', '/wp-content/plugins/unity-carousels/resources/glidejs/glide.min.js', array(), '3.6.2', true );
+wp_enqueue_style('unity-carousels-glidejs-style', '/wp-content/plugins/unity-carousels/resources/glidejs/glide.core.min.css', array(), $version, 'all');
