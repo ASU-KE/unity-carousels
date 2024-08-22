@@ -7,15 +7,12 @@
 	"category": "unity-carousels",
 	"icon": "smiley",
 	"description": "Carousel build off of the card component, to group related content together when all content isn't critical for the viewer to see all content options at once.",
-	"example": {},
 	"supports": {
 		"html": false,
 		"align": ["wide", "full"]
 	},
 	"textdomain": "unity-carousels",
 	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css",
 	"viewScript": "file:./view.js",
 	"attributes": {
 		"perView": {
@@ -29,6 +26,22 @@
 		"maxWidth": {
 			"type": "string",
 			"default": "1000px"
+		}
+	},
+	"example": {
+		"attributes": {
+			"perView": {
+				"type": "string",
+				"default": "2"
+			},
+			"cardItems": {
+				"type": "array",
+				"default": []
+			},
+			"maxWidth": {
+				"type": "string",
+				"default": "500px"
+			}
 		}
 	}
 }
