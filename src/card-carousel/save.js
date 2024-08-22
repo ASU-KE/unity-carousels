@@ -15,10 +15,21 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @return {Element} Element to render.
  */
-export default function save() {
+export default function save(props) {
+	const {
+		attributes: {
+			perView,
+			maxWidth,
+			cardItems
+		}
+	} = props
+
 	return (
-		<div { ...useBlockProps.save() }>
-			{ 'Unity Carousels – hello from the saved content!' }
+		<div { ...useBlockProps.save() }
+		data-per-view={ perView }
+		data-max-width={ maxWidth }
+		data-card-items={ JSON.stringify(cardItems) }
+		>
 		</div>
 	);
 }
