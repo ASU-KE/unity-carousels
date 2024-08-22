@@ -3,7 +3,7 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
  */
-import { __ } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n'
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -11,16 +11,17 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
-import  Inspector from './inspector';
+import { useBlockProps } from '@wordpress/block-editor'
+import  Inspector from './inspector'
 import { CardCarousel } from '../../resources/asu-unity-stack/packages/component-carousel/src/components/CardCarousel'
+import anonImg from "../../resources/asu-unity-stack/shared/assets/img/named/anon.png"
+
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
  *
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
-import './editor.scss';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -32,11 +33,18 @@ import './editor.scss';
  */
 
 
-export default function Edit() {
+export default function Edit(props) {
+	const {
+		attributes: {
+			perView,
+			maxWidth,
+			cardItems
+		}, setAttributes
+	} = props
 	var myCarouselItems = [
 		{
-		  id: 0,
-		  imageSource: "https://source.unsplash.com/random/500x400?a=-1",
+		  id: 9999,
+		  imageSource: anonImg,
 		  imageAltText: "Card image cap",
 		  title: "Card 1",
 		  content:
@@ -53,8 +61,8 @@ export default function Edit() {
 		  ],
 		},
 		{
-		  id: 1,
-		  imageSource: "https://source.unsplash.com/random/300x400?a=0",
+		  id: 99999,
+		  imageSource: anonImg,
 		  imageAltText: "Card image cap",
 		  title: "Card 2",
 		  content:
@@ -71,8 +79,8 @@ export default function Edit() {
 		  ],
 		},
 		{
-		  id: 2,
-		  imageSource: "https://source.unsplash.com/random/400x400?a=1",
+		  id: 999999,
+		  imageSource: anonImg,
 		  imageAltText: "Card image cap",
 		  title: "Card 3",
 		  content:
@@ -88,108 +96,27 @@ export default function Edit() {
 			},
 		  ],
 		},
-		{
-		  id: 3,
-		  imageSource: "https://source.unsplash.com/random/200x200?a=2",
-		  imageAltText: "Card image cap",
-		  title: "Card 4",
-		  content:
-			"Body 4 copy goes here. Limit to 5 lines max. Lorem ipsum dolor sit\n      amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt\n      ut labore et dolore magna aliqua eiusmod tempo.",
-		  buttons: [
-			{
-			  ariaLabel: "dummy button",
-			  color: "maroon",
-			  href: "#",
-			  label: `Button 4 link here`,
-			  size: "default",
-			  onClick: () => window.alert("Holoa Amigo 😃."),
-			},
-		  ],
-		},
-		{
-		  id: 4,
-		  imageSource: "https://source.unsplash.com/random/300x400?a=3",
-		  imageAltText: "Card image cap",
-		  title: "Card 5",
-		  content:
-			"Body 5 copy goes here. Limit to 5 lines max. Lorem ipsum dolor sit\n      amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt\n      ut labore et dolore magna aliqua eiusmod tempo.",
-		  buttons: [
-			{
-			  ariaLabel: "dummy button",
-			  color: "maroon",
-			  href: "#",
-			  label: `Button 5 link here`,
-			  size: "default",
-			  onClick: () => {
-				window.alert("Hola Amigo 😃.");
-				return false;
-			  },
-			},
-		  ],
-		},
-		{
-		  id: 5,
-		  imageSource: "https://source.unsplash.com/random/300x400?a=4",
-		  imageAltText: "Card image cap",
-		  title: "Card 6",
-		  content:
-			"Body 6 copy goes here. Limit to 5 lines max. Lorem ipsum dolor sit\n      amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt\n      ut labore et dolore magna aliqua eiusmod tempo.",
-		  buttons: [
-			{
-			  ariaLabel: "dummy button",
-			  color: "maroon",
-			  href: "#",
-			  label: `Button 6 link here`,
-			  size: "default",
-			  onClick: () => window.alert("Holoa Amigo 😃."),
-			},
-		  ],
-		},
-		{
-		  id: 6,
-		  imageSource: "https://source.unsplash.com/random/400x400?a=5",
-		  imageAltText: "Card image cap",
-		  title: "Card 7",
-		  content:
-			"Body 7 copy goes here. Limit to 5 lines max. Lorem ipsum dolor sit\n      amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt\n      ut labore et dolore magna aliqua eiusmod tempo.",
-		  buttons: [
-			{
-			  ariaLabel: "dummy button",
-			  color: "maroon",
-			  href: "#",
-			  label: `Button 7 link here`,
-			  size: "default",
-			  onClick: () => window.alert("Holoa Amigo 😃."),
-			},
-		  ],
-		},
-		{
-		  id: 7,
-		  imageSource: "https://source.unsplash.com/random/300x400?a=6",
-		  imageAltText: "Card image cap",
-		  title: "Card 8",
-		  content:
-			"Body 8 copy goes here. Limit to 5 lines max. Lorem ipsum dolor sit\n      amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt\n      ut labore et dolore magna aliqua eiusmod tempo.",
-		  buttons: [
-			{
-			  ariaLabel: "dummy button",
-			  color: "maroon",
-			  href: "#",
-			  label: `Button 8 link here`,
-			  size: "default",
-			  target: "_parent",
-			},
-		  ],
-		},
 	  ];
+	if (cardItems.length == 0 ) {
+		setAttributes( { cardItems: myCarouselItems } );
+	}
 	const args = {
-		perView: 2,
-		cardItems: myCarouselItems,
+		perView: "2",
+		cardItems,
 		maxWidth: "1000px",
 	}
+	const blockProps = useBlockProps()
+	 // Good - a new array is created from the old list attribute and a new list item:
+//const { list } = attributes;
+//const addListItem = ( newListItem ) =>
+//    setAttributes( { list: [ ...list, newListItem ] } );
+
 	return (
-		<div { ...useBlockProps() }>
-			{'hello from editor div'}
+		<>
+		<Inspector { ...props } />
+		<div { ...blockProps }>
+			<CardCarousel {...args} />
 		</div>
+		</>
 	);
 }
