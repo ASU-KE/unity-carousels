@@ -10,39 +10,51 @@ import { Button, IconButton, PanelBody, PanelRow, TextControl, } from "@wordpres
  *
  * @param {Object} props
  */
-const newCard = {
-	id: 0,
-	imageSource: "/resources/asu-unity-stack/shared/assets/img/named/anon.png",
-	imageAltText: "Card image cap",
-	title: "Card 1",
-	content:
-	"Body 1 copy goes here. Limit to 5 lines max. Lorem ipsum dolor sit\n      amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt\n      ut labore et dolore magna aliqua eiusmod tempo.",
-	buttons: [
-	{
-		ariaLabel: "dummy button",
-		color: "maroon",
-		href: "#",
-		label: `Button 1 link here`,
-		size: "default",
-		onClick: () => window.alert("Holoa Amigo 😃."),
-	},
-	],
-}
+
 const Inspector = (props) => {
+	const newCard = {
+		id: 0,
+		imageSource: "/resources/asu-unity-stack/shared/assets/img/named/anon.png",
+		imageAltText: "Card image cap",
+		title: "Card 1",
+		content:
+		"Body 1 copy goes here. Limit to 5 lines max. Lorem ipsum dolor sit\n      amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt\n      ut labore et dolore magna aliqua eiusmod tempo.",
+		buttons: [
+		{
+			ariaLabel: "dummy button",
+			color: "maroon",
+			href: "#",
+			label: `Button 1 link here`,
+			size: "default",
+			onClick: () => window.alert("Holoa Amigo 😃."),
+		},
+		],
+	}
   const handleAddCard = () => {
     const cardItems = [...props.attributes.cardItems]
+		console.log( returnLast(cardItems) )
 		if( cardItems[0].id === 9999 ) {
 			props.setAttributes( { cardItems: [ newCard ] } )
 		} else {
 			props.setAttributes( { cardItems: [ ...cardItems, newCard ] } )
 		}
-
 			 // Good - a new array is created from the old list attribute and a new list item:
 //const { list } = attributes;
 //const addListItem = ( newListItem ) =>
 //    setAttributes( { list: [ ...list, newListItem ] } );
   };
+	function returnLast(arr) {
+		return arr.at(-1);
+	}
 
+	const handleCardHeaderChange = (text, cardItem, index) => {
+		const cardItems = [...props.attributes.cardItems]
+		let card = cardItems[index]
+		card.title = text
+		props.setAttributes({ cardItems: cardItems });
+}
+
+	let cardItemFields
   // const handleRemoveItem = (index) => {
   //   const itemIcons = [...props.attributes.itemIcons];
   //   const itemTexts = [...props.attributes.itemTexts];
@@ -139,13 +151,32 @@ const Inspector = (props) => {
   //     );
   //   });
   // }
+	if (props.attributes.cardItems.length && props.attributes.cardItems[0].id !== 9999) {
+		cardItemFields = props.attributes.cardItems.map((cardItem, index) => {
+			return (
+				<PanelBody title={`Card ${index+1}`}>
+					<PanelRow key={index}>
+						<TextControl
+							label="Header text"
+							className="card-header-text"
+							placeholder="Placeholder text"
+							value={cardItem.title}
+							onChange={(text) => handleCardHeaderChange(text, cardItem, index)}
+						/>
+					</PanelRow>
+				</PanelBody>
+			)
+		})
+	}
+
 
   return (
     <InspectorControls>
-      <PanelBody title={__("UDS AnchorMenu Items", "unityblocks")}>
+      <PanelBody title={__("Carousel Cards")}>
+				{cardItemFields}
         <PanelRow>
           <Button onClick={handleAddCard.bind(this)}>
-            {__("Add Item")}
+            {__("Add Card")}
           </Button>
         </PanelRow>
       </PanelBody>
