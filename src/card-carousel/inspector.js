@@ -2,8 +2,8 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n"
-import { InspectorControls } from "@wordpress/block-editor"
-import { Button, IconButton, PanelBody, PanelRow, TextControl, } from "@wordpress/components"
+import { InspectorControls, MediaPlaceholder } from "@wordpress/block-editor"
+import { Button, IconButton, PanelBody, PanelRow, TextControl, TextareaControl } from "@wordpress/components"
 
 /**
  * Inspector controls
@@ -52,7 +52,19 @@ const Inspector = (props) => {
 		let card = cardItems[index]
 		card.title = text
 		props.setAttributes({ cardItems: cardItems });
-}
+	}
+	const handleCardContentChange = (text, cardItem, index) => {
+		const cardItems = [...props.attributes.cardItems]
+		let card = cardItems[index]
+		card.content = text
+		props.setAttributes({ cardItems: cardItems });
+	}
+	const handleCardImageSourceChange = (mediaUrl, cardItem, index) => {
+		const cardItems = [...props.attributes.cardItems]
+		let card = cardItems[index]
+		card.imageSource = mediaUrl
+		props.setAttributes({ cardItems: cardItems });
+	}
 
 	let cardItemFields
   // const handleRemoveItem = (index) => {
@@ -162,6 +174,24 @@ const Inspector = (props) => {
 							placeholder="Placeholder text"
 							value={cardItem.title}
 							onChange={(text) => handleCardHeaderChange(text, cardItem, index)}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<TextareaControl
+							label="Content text"
+							className="card-content-text"
+							placeholder="Placeholder text"
+							value={cardItem.content}
+							onChange={(text) => handleCardContentChange(text, cardItem, index)}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<MediaPlaceholder
+							icon="format-image"
+							labels={{ title: "Image", instructions: "Upload an image" }}
+							allowedTypes = { [ 'image' ] }
+							multiple = { false }
+							onSelect={(image) => handleCardImageSourceChange(image.url, cardItem, index)}
 						/>
 					</PanelRow>
 				</PanelBody>
