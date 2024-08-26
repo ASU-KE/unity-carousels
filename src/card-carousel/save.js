@@ -20,7 +20,8 @@ export default function save(props) {
 		attributes: {
 			perView,
 			maxWidth,
-			cardItems
+			cardItems,
+			cardHorizontal
 		}
 	} = props
 
@@ -29,6 +30,7 @@ export default function save(props) {
 		data-per-view={ perView }
 		data-max-width={ maxWidth }
 		data-card-items={ JSON.stringify(cardItems) }
+		data-card-horizontal={ cardHorizontal }
 		>
 		</div>
 	);
