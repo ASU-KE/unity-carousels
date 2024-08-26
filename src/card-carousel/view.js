@@ -27,11 +27,15 @@ const carousels = document.querySelectorAll(".wp-block-unity-carousels-card-caro
 carousels.forEach((carousel) => {
 const root = createRoot(carousel);
 const cardItems = JSON.parse(carousel.dataset.cardItems);
+const perView = carousel.dataset.perView;
+const maxWidth = carousel.dataset.maxWidth;
+const cardHorizontal = carousel.dataset.cardHorizontal;
 
 const props = {
-	perView: "2",
+	perView: perView,
 	cardItems: cardItems,
-	maxWidth: "1000px",
+	maxWidth: maxWidth,
+	cardHorizontal: cardHorizontal,
 }
 
 root.render(<CardCarousel { ...props}/>);
