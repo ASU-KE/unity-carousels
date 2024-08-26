@@ -3,7 +3,7 @@
  */
 import { __ } from "@wordpress/i18n"
 import { InspectorControls, MediaPlaceholder } from "@wordpress/block-editor"
-import { Button, IconButton, PanelBody, PanelRow, TextControl, TextareaControl } from "@wordpress/components"
+import { Button, IconButton, PanelBody, PanelRow, TextControl, TextareaControl, ToggleControl } from "@wordpress/components"
 
 /**
  * Inspector controls
@@ -30,6 +30,15 @@ const Inspector = (props) => {
 		},
 		],
 	}
+	const handlePerViewChange = (perView) => {
+		props.setAttributes({ perView });
+	};
+	const handleMaxWidthChange = (maxWidth) => {
+		props.setAttributes({ maxWidth });
+	};
+	const toggleHorizontalCard = (checked) => {
+		props.setAttributes({ cardHorizontal: checked });
+	};
   const handleAddCard = () => {
     const cardItems = [...props.attributes.cardItems]
 		console.log( returnLast(cardItems) )
@@ -65,6 +74,19 @@ const Inspector = (props) => {
 		card.imageSource = mediaUrl
 		props.setAttributes({ cardItems: cardItems });
 	}
+	// const handleAddCtaButton = () => {
+	// 	const cardItems = [...props.attributes.cardItems]
+	// 	let card = cardItems[index]
+	// 	card.buttons.push({
+	// 		ariaLabel: "dummy button",
+	// 		color: "maroon",
+	// 		href: "#",
+	// 		label: `Button 1 link here`,
+	// 		size: "default",
+	// 		onClick: () => window.alert("Holoa Amigo 😃."),
+	// 	})
+	// 	props.setAttributes({ cardItems: cardItems });
+	// }
 
 	let cardItemFields
   // const handleRemoveItem = (index) => {
@@ -165,6 +187,9 @@ const Inspector = (props) => {
   // }
 	if (props.attributes.cardItems.length && props.attributes.cardItems[0].id !== 9999) {
 		cardItemFields = props.attributes.cardItems.map((cardItem, index) => {
+			const mediaPreview = !! cardItem.imageSource && (
+				<img src={ cardItem.imageSource } />
+			);
 			return (
 				<PanelBody title={`Card ${index+1}`}>
 					<PanelRow key={index}>
@@ -192,8 +217,14 @@ const Inspector = (props) => {
 							allowedTypes = { [ 'image' ] }
 							multiple = { false }
 							onSelect={(image) => handleCardImageSourceChange(image.url, cardItem, index)}
+							mediaPreview={mediaPreview}
 						/>
 					</PanelRow>
+					<PanelRow>
+          <Button variant="primary" >
+            {__("Add CTA Button")}
+          </Button>
+        </PanelRow>
 				</PanelBody>
 			)
 		})
@@ -202,11 +233,34 @@ const Inspector = (props) => {
 
   return (
     <InspectorControls>
+			<PanelBody title={__("Carousel Settings")}>
+				<PanelRow>
+					<TextControl
+						label={__("Per View")}
+						value={props.attributes.perView}
+						onChange={handlePerViewChange}
+					/>
+				</PanelRow>
+				<PanelRow>
+					<TextControl
+						label={__("Max Width")}
+						value={props.attributes.maxWidth}
+						onChange={handleMaxWidthChange}
+					/>
+				</PanelRow>
+				<PanelRow>
+					<ToggleControl
+						label={__("Horizontal Cards")}
+						checked={props.attributes.cardHorizontal}
+						onChange={toggleHorizontalCard}
+					/>
+				</PanelRow>
+			</PanelBody>
       <PanelBody title={__("Carousel Cards")}>
 				{cardItemFields}
         <PanelRow>
-          <Button onClick={handleAddCard.bind(this)}>
-            {__("Add Card")}
+          <Button variant="primary" onClick={handleAddCard.bind(this)}>
+            {__("Add New Card")}
           </Button>
         </PanelRow>
       </PanelBody>
