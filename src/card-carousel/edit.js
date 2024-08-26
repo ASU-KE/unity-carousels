@@ -38,7 +38,8 @@ export default function Edit(props) {
 		attributes: {
 			perView,
 			maxWidth,
-			cardItems
+			cardItems,
+			cardHorizontal,
 		}, setAttributes
 	} = props
 	var myCarouselItems = [
@@ -104,6 +105,7 @@ export default function Edit(props) {
 		perView: "2",
 		cardItems,
 		maxWidth: "1000px",
+		cardHorizontal: cardHorizontal,
 	}
 	const blockProps = useBlockProps()
 	 // Good - a new array is created from the old list attribute and a new list item:
