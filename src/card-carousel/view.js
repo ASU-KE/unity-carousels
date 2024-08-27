@@ -29,7 +29,7 @@ const root = createRoot(carousel);
 const cardItems = JSON.parse(carousel.dataset.cardItems);
 const perView = carousel.dataset.perView;
 const maxWidth = carousel.dataset.maxWidth;
-const cardHorizontal = carousel.dataset.cardHorizontal;
+const cardHorizontal = carousel.dataset.cardHorizontal === "true";
 
 const props = {
 	perView: perView,
