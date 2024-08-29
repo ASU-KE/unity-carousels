@@ -1,9 +1,10 @@
 /**
  * WordPress dependencies
  */
+import { useState } from 'react';
 import { __ } from "@wordpress/i18n"
 import { InspectorControls, MediaPlaceholder } from "@wordpress/block-editor"
-import { Button, IconButton, PanelBody, PanelRow, TextControl, TextareaControl, ToggleControl, SelectControl } from "@wordpress/components"
+import { Button, PanelBody, PanelRow, TextControl, TextareaControl, ToggleControl, SelectControl } from "@wordpress/components"
 import anonImg from "../../resources/asu-unity-stack/shared/assets/img/named/anon.png"
 
 /**
@@ -27,7 +28,7 @@ const Inspector = (props) => {
 				href: "#",
 				label: `Button 1 link here`,
 				size: "default",
-				//onClick: () => window.alert("Holoa Amigo 😃."),
+				//onClick: () => window.alert("alert"),
 			},
 		],
 	}
@@ -46,7 +47,6 @@ const Inspector = (props) => {
 
   const handleAddCard = () => {
     const cardItems = [...props.attributes.cardItems]
-		console.log( returnLast(cardItems) )
 		if( cardItems[0].id === 9999 ) {
 			props.setAttributes( { cardItems: [ newCard ] } )
 		} else {
@@ -55,6 +55,13 @@ const Inspector = (props) => {
 			props.setAttributes( { cardItems: [ ...cardItems, newCard ] } )
 		}
   }
+
+	const handleRemoveCard = (event, index) => {
+		const cardItems = [...props.attributes.cardItems]
+		let filteredCardItems = cardItems.filter((card) => card.id !== index)
+		filteredCardItems.forEach((card, i) => { card.id = i })
+		props.setAttributes({ cardItems: filteredCardItems })
+}
 
 	function returnLast(arr) {
 		return arr.at(-1)
@@ -109,10 +116,25 @@ const Inspector = (props) => {
 		props.setAttributes({ cardItems: cardItems })
 	}
 
-	const handleItemTargetChange = (targetBool, index) => {
+	const handleButtonAriaLabelChange = (ariaLabel, cardItem, index) => {
 		const cardItems = [...props.attributes.cardItems]
 		let card = cardItems[index]
-		if (targetBool) {
+		card.buttons[0].ariaLabel = ariaLabel
+		props.setAttributes({ cardItems: cardItems })
+	}
+
+	const handleRemoveButton = (event, cardItem, index) => {
+		const cardItems = [...props.attributes.cardItems]
+		let card = cardItems[index]
+		card.buttons = [{ariaLabel: null,color: null,href: null,label:null,size: null}]
+		props.setAttributes({ cardItems: cardItems })
+	}
+
+	const handleLinkTargetChange = (cardItem, index) => {
+		//setChangeLinkTarget( !changeLinkTarget );
+		const cardItems = [...props.attributes.cardItems]
+		let card = cardItems[index]
+		if (changeLinkTarget) {
 			card.buttons[0].target = "_blank"
 		} else {
 			card.buttons[0].target = "_self"
@@ -120,47 +142,18 @@ const Inspector = (props) => {
 		props.setAttributes({ cardItems: cardItems })
 	}
 
-	// const handleAddCtaButton = () => {
-	// 	const cardItems = [...props.attributes.cardItems]
-	// 	let card = cardItems[index]
-	// 	card.buttons.push({
-	// 		ariaLabel: "dummy button",
-	// 		color: "maroon",
-	// 		href: "#",
-	// 		label: `Button 1 link here`,
-	// 		size: "default",
-	// 		onClick: () => window.alert("Holoa Amigo 😃."),
-	// 	})
-	// 	props.setAttributes({ cardItems: cardItems });
-	// }
-
 	let cardItemFields
-
-  // const handleItemTargetChange = (targetIdName, index) => {
-  //   const itemTargets = [...props.attributes.itemTargets];
-  //   itemTargets[index] = targetIdName;
-  //   props.setAttributes({ itemTargets });
-  // };
-
-  // const handleItemIconValueChange = (index, value, itemIndex) => {
-  //   const itemIcons = [...props.attributes.itemIcons];
-  //   let icon = itemIcons[itemIndex];
-  //   if (!Array.isArray(icon) || icon.length !== 2) {
-  //     icon = ["", ""];
-  //   }
-  //   icon[index] = value;
-  //   handleItemIconChange(icon, itemIndex);
-  // }
 
 	if (props.attributes.cardItems.length && props.attributes.cardItems[0].id !== 9999) {
 		cardItemFields = props.attributes.cardItems.map((cardItem, index) => {
-			const mediaPreview = !! cardItem.imageSource && (
-				<img src={ cardItem.imageSource } />
-			);
-			let targetBool = false
+
+			const mediaPreview = !! cardItem.imageSource && (<img src={ cardItem.imageSource } />)
+
+			const [ changeLinkTarget, setChangeLinkTarget ] = useState( false );
+
 			return (
-				<PanelBody title={`Card ${index+1}`}>
-					<PanelRow key={index}>
+				<PanelBody title={`Card ${index+1}`} key={index}>
+					<PanelRow>
 						<TextControl
 							label="Header text"
 							className="card-header-text"
@@ -228,16 +221,35 @@ const Inspector = (props) => {
 						onChange={(size) => handleButtonSizeChange(size, cardItem, index)}
 					/>
 				</PanelRow>
-				<PanelRow>
+				{/* <PanelRow>
 					<ToggleControl
 						label={__("Open in new tab")}
 						checked={targetBool}
 						onChange={(targetBool) => handleItemTargetChange(targetBool, index)}
 					/>
+				</PanelRow> */}
+				<PanelRow>
+					<ToggleControl
+						label={__("Open in new tab")}
+						checked={changeLinkTarget}
+						onChange={handleLinkTargetChange(cardItem, index)}
+					/>
+				</PanelRow>
+				<PanelRow>
+					<TextControl
+						label={__("Button Aria Label")}
+						value={cardItem.buttons[0].ariaLabel}
+						onChange={(ariaLabel) => handleButtonAriaLabelChange(ariaLabel, cardItem, index)}
+					/>
+				</PanelRow>
+				<PanelRow>
+					<Button variant="secondary" size="small" onClick={(event) => handleRemoveButton(event, cardItem, index)}>
+						{__("Remove Button")}
+					</Button>
 				</PanelRow>
 				</PanelBody>
 				<PanelRow>
-					<Button variant="secondary" size="small">
+					<Button variant="secondary" size="small" onClick={(event) => handleRemoveCard(event, index)}>
 						{__("Remove Card")}
 					</Button>
 				</PanelRow>
