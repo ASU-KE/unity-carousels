@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "title": "Card Carousel",
   "category": "unity-carousels",
-  "icon": "smiley",
+  "icon": "images-alt",
   "description": "Carousel build off of the card component, to group related content together when all content isn't critical for the viewer to see all content options at once.",
   "supports": {
     "html": false,
