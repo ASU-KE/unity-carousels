@@ -1,7 +1,4 @@
-/**
- * WordPress dependencies
- */
-import { useState } from 'react';
+import { useState } from 'react'
 import { __ } from "@wordpress/i18n"
 import { InspectorControls, MediaPlaceholder } from "@wordpress/block-editor"
 import { Button, PanelBody, PanelRow, TextControl, TextareaControl, ToggleControl, SelectControl } from "@wordpress/components"
@@ -61,7 +58,7 @@ const Inspector = (props) => {
 		let filteredCardItems = cardItems.filter((card) => card.id !== index)
 		filteredCardItems.forEach((card, i) => { card.id = i })
 		props.setAttributes({ cardItems: filteredCardItems })
-}
+	}
 
 	function returnLast(arr) {
 		return arr.at(-1)
@@ -130,11 +127,10 @@ const Inspector = (props) => {
 		props.setAttributes({ cardItems: cardItems })
 	}
 
-	const handleLinkTargetChange = (cardItem, index) => {
-		//setChangeLinkTarget( !changeLinkTarget );
+	const handleLinkTargetChange = (cardItem, index, change) => {
 		const cardItems = [...props.attributes.cardItems]
 		let card = cardItems[index]
-		if (changeLinkTarget) {
+		if (change) {
 			card.buttons[0].target = "_blank"
 		} else {
 			card.buttons[0].target = "_self"
@@ -145,6 +141,7 @@ const Inspector = (props) => {
 	let cardItemFields
 
 	if (props.attributes.cardItems.length && props.attributes.cardItems[0].id !== 9999) {
+
 		cardItemFields = props.attributes.cardItems.map((cardItem, index) => {
 
 			const mediaPreview = !! cardItem.imageSource && (<img src={ cardItem.imageSource } />)
@@ -221,18 +218,11 @@ const Inspector = (props) => {
 						onChange={(size) => handleButtonSizeChange(size, cardItem, index)}
 					/>
 				</PanelRow>
-				{/* <PanelRow>
-					<ToggleControl
-						label={__("Open in new tab")}
-						checked={targetBool}
-						onChange={(targetBool) => handleItemTargetChange(targetBool, index)}
-					/>
-				</PanelRow> */}
 				<PanelRow>
 					<ToggleControl
 						label={__("Open in new tab")}
 						checked={changeLinkTarget}
-						onChange={handleLinkTargetChange(cardItem, index)}
+						onChange={(change) => {setChangeLinkTarget(change); handleLinkTargetChange(cardItem, index, change)}}
 					/>
 				</PanelRow>
 				<PanelRow>
@@ -257,7 +247,6 @@ const Inspector = (props) => {
 			)
 		})
 	}
-
 
   return (
     <InspectorControls>
