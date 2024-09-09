@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name:       Unity Carousels
- * Description:       Example block scaffolded with Create Block tool.
+ * Description:       Carousels built with glidejs customized for UDS.
  * Requires at least: 6.2.0
- * Requires PHP:      7.0
- * Version:           0.1.0
+ * Requires PHP:      7.4
+ * Version:           1.0.0
  * Author:            ASU KE Web Services
  * Author URI:        https://rto.asu.edu/web-services
  * License:           GPL-2.0-or-later
