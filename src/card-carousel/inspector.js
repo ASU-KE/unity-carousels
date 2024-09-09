@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { __ } from "@wordpress/i18n"
 import { InspectorControls, MediaPlaceholder } from "@wordpress/block-editor"
 import { Button, PanelBody, PanelRow, TextControl, TextareaControl, ToggleControl, SelectControl } from "@wordpress/components"
@@ -127,17 +126,6 @@ const Inspector = (props) => {
 		props.setAttributes({ cardItems: cardItems })
 	}
 
-	const handleLinkTargetChange = (cardItem, index, change) => {
-		const cardItems = [...props.attributes.cardItems]
-		let card = cardItems[index]
-		if (change) {
-			card.buttons[0].target = "_blank"
-		} else {
-			card.buttons[0].target = "_self"
-		}
-		props.setAttributes({ cardItems: cardItems })
-	}
-
 	let cardItemFields
 
 	if (props.attributes.cardItems.length && props.attributes.cardItems[0].id !== 9999) {
@@ -145,8 +133,6 @@ const Inspector = (props) => {
 		cardItemFields = props.attributes.cardItems.map((cardItem, index) => {
 
 			const mediaPreview = !! cardItem.imageSource && (<img src={ cardItem.imageSource } />)
-
-			const [ changeLinkTarget, setChangeLinkTarget ] = useState( false );
 
 			return (
 				<PanelBody title={`Card ${index+1}`} key={index}>
@@ -216,13 +202,6 @@ const Inspector = (props) => {
 							{ label: "X-Small", value: "xsmall" },
 						]}
 						onChange={(size) => handleButtonSizeChange(size, cardItem, index)}
-					/>
-				</PanelRow>
-				<PanelRow>
-					<ToggleControl
-						label={__("Open in new tab")}
-						checked={changeLinkTarget}
-						onChange={(change) => {setChangeLinkTarget(change); handleLinkTargetChange(cardItem, index, change)}}
 					/>
 				</PanelRow>
 				<PanelRow>
