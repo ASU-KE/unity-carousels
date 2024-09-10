@@ -56,8 +56,9 @@ plugins where more information needs to be conveyed that doesn't fit into the ca
 
 ### Development
 
+#### glide.js
 The CSS styling is contained in a SASS file in the unity package. Currently that SASS file needs to be compiled in the theme.
 
-#### Update glide.js
+##### Update glide.js
 - `npm i`
 - copy `glide.min.js` and `glide.core.min.css`
