@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "unity-carousels/image-carousel",
+  "version": "1.0.0",
+  "title": "Image Carousel",
+  "category": "unity-carousels",
+  "keywords": [
+    "unityblocks",
+    "carousel",
+    "image"
+  ],
+  "icon": "images-alt2",
+  "description": "UDS Carousel block",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "textdomain": "unity-carousels",
+  "viewScript": "file:./view.js",
+  "editorScript": "file:./index.js",
+  "attributes": {
+    "perView": {
+      "type": "string",
+      "default": "2"
+    },
+    "imageCardItems": {
+      "type": "array",
+      "default": []
+    },
+    "maxWidth": {
+      "type": "string",
+      "default": "1200px"
+    },
+    "imageAutoSize": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}
