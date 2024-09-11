@@ -5,13 +5,8 @@
   "version": "1.0.0",
   "title": "Image Carousel",
   "category": "unity-carousels",
-  "keywords": [
-    "unityblocks",
-    "carousel",
-    "image"
-  ],
   "icon": "images-alt2",
-  "description": "UDS Carousel block",
+  "description": "Carousel with images as the main focus. Title and content for each card is optional.",
   "supports": {
     "html": false,
     "align": [
