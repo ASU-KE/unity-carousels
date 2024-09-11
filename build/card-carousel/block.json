@@ -34,21 +34,5 @@
       "type": "boolean",
       "default": false
     }
-  },
-  "example": {
-    "attributes": {
-      "perView": {
-        "type": "string",
-        "default": "2"
-      },
-      "cardItems": {
-        "type": "array",
-        "default": []
-      },
-      "maxWidth": {
-        "type": "string",
-        "default": "500px"
-      }
-    }
   }
 }
