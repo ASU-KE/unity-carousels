@@ -72,54 +72,58 @@ const Inspector = (props) => {
 		props.setAttributes({ imageCardItems: imageCardItems })
 	}
 
-  let imageCardItemFields
+	let imageCardItemFields
 
-  if (props.attributes.imageCardItems.length) {
-    imageCardItemFields = props.attributes.imageCardItems.map((imageCardItem, index) => {
+	if (props.attributes.imageCardItems.length) {
 
-			const mediaPreview = !! imageCardItem.imageSource && (<img src={ imageCardItem.imageSource } />)
+		imageCardItemFields = props.attributes.imageCardItems.map((imageCardItem, index) => {
 
-      return (
-        <PanelBody title={`Card ${index+1}`} key={index}>
-					<PanelRow>
-						<MediaPlaceholder
-							icon="format-image"
-							labels={{ title: "Image", instructions: "Upload an image" }}
-							allowedTypes = { [ 'image' ] }
-							multiple = { false }
-							onSelect={(image) => handleCardImageSourceChange(image.url, imageCardItem, index)}
-							mediaPreview={mediaPreview}
-						/>
-					</PanelRow>
-					<PanelRow>
-						<TextControl
-							label="Header text"
-							className="card-header-text"
-							placeholder="Placeholder text"
-							value={imageCardItem.title}
-							onChange={(text) => handleCardHeaderChange(text, imageCardItem, index)}
-						/>
-					</PanelRow>
-					<PanelRow>
-						<TextareaControl
-							label="Content text"
-							className="card-content-text"
-							placeholder="Placeholder text"
-							value={imageCardItem.content}
-							onChange={(text) => handleCardContentChange(text, imageCardItem, index)}
-						/>
-					</PanelRow>
-					<PanelRow>
-						<Button variant="secondary" size="small" onClick={(event) => handleRemoveCard(event, index)}>
-							{__("Remove Card")}
-						</Button>
-					</PanelRow>
-        </PanelBody>
-      )
-    })
-  }
+			if( imageCardItem.id < 9999 ) {
 
-  return (
+				const mediaPreview = !! imageCardItem.imageSource && (<img src={ imageCardItem.imageSource } />)
+
+				return (
+					<PanelBody title={`Card ${index+1}`} key={index}>
+						<PanelRow>
+							<MediaPlaceholder
+								icon="format-image"
+								labels={{ title: "Image", instructions: "Upload an image" }}
+								allowedTypes = { [ 'image' ] }
+								multiple = { false }
+								onSelect={(image) => handleCardImageSourceChange(image.url, imageCardItem, index)}
+								mediaPreview={mediaPreview}
+							/>
+						</PanelRow>
+						<PanelRow>
+							<TextControl
+								label="Header text"
+								className="card-header-text"
+								placeholder="Placeholder text"
+								value={imageCardItem.title}
+								onChange={(text) => handleCardHeaderChange(text, imageCardItem, index)}
+							/>
+						</PanelRow>
+						<PanelRow>
+							<TextareaControl
+								label="Content text"
+								className="card-content-text"
+								placeholder="Placeholder text"
+								value={imageCardItem.content}
+								onChange={(text) => handleCardContentChange(text, imageCardItem, index)}
+							/>
+						</PanelRow>
+						<PanelRow>
+							<Button variant="secondary" size="small" onClick={(event) => handleRemoveCard(event, index)}>
+								{__("Remove Card")}
+							</Button>
+						</PanelRow>
+					</PanelBody>
+				)
+			}
+		})
+	}
+
+	return (
     <InspectorControls>
 			<PanelBody title={__("Carousel Settings")}>
 				<PanelRow>
@@ -145,16 +149,16 @@ const Inspector = (props) => {
 					/>
 				</PanelRow>
 			</PanelBody>
-      <PanelBody title={__("Carousel Cards")}>
+			<PanelBody title={__("Carousel Cards")}>
 				{imageCardItemFields}
-        <PanelRow>
-          <Button variant="primary" onClick={handleAddCard.bind(this)}>
-            {__("Add New Card")}
-          </Button>
-        </PanelRow>
-      </PanelBody>
+				<PanelRow>
+					<Button variant="primary" onClick={handleAddCard.bind(this)}>
+						{__("Add New Card")}
+					</Button>
+				</PanelRow>
+			</PanelBody>
     </InspectorControls>
-  )
+	)
 }
 
 export default Inspector
