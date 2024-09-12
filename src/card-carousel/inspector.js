@@ -132,102 +132,105 @@ const Inspector = (props) => {
 
 		cardItemFields = props.attributes.cardItems.map((cardItem, index) => {
 
-			const mediaPreview = !! cardItem.imageSource && (<img src={ cardItem.imageSource } />)
+			if( cardItem.id < 9999 ) {
 
-			return (
-				<PanelBody title={`Card ${index+1}`} key={index}>
+				const mediaPreview = !! cardItem.imageSource && (<img src={ cardItem.imageSource } />)
+
+				return (
+					<PanelBody title={`Card ${index+1}`} key={index}>
+						<PanelRow>
+							<TextControl
+								label="Header text"
+								className="card-header-text"
+								placeholder="Placeholder text"
+								value={cardItem.title}
+								onChange={(text) => handleCardHeaderChange(text, cardItem, index)}
+							/>
+						</PanelRow>
+						<PanelRow>
+							<TextareaControl
+								label="Content text"
+								className="card-content-text"
+								placeholder="Placeholder text"
+								value={cardItem.content}
+								onChange={(text) => handleCardContentChange(text, cardItem, index)}
+							/>
+						</PanelRow>
+						<PanelRow>
+							<MediaPlaceholder
+								icon="format-image"
+								labels={{ title: "Image", instructions: "Upload an image" }}
+								allowedTypes = { [ 'image' ] }
+								multiple = { false }
+								onSelect={(image) => handleCardImageSourceChange(image.url, cardItem, index)}
+								mediaPreview={mediaPreview}
+							/>
+						</PanelRow>
+						<PanelBody title={__("CTA Button")}>
 					<PanelRow>
 						<TextControl
-							label="Header text"
-							className="card-header-text"
-							placeholder="Placeholder text"
-							value={cardItem.title}
-							onChange={(text) => handleCardHeaderChange(text, cardItem, index)}
+							label={__("Button Label")}
+							value={cardItem.buttons[0].label}
+							onChange={(label) => handleButtonLabelChange(label, cardItem, index)}
 						/>
 					</PanelRow>
 					<PanelRow>
-						<TextareaControl
-							label="Content text"
-							className="card-content-text"
-							placeholder="Placeholder text"
-							value={cardItem.content}
-							onChange={(text) => handleCardContentChange(text, cardItem, index)}
+						<TextControl
+							label={__("Button URL")}
+							value={cardItem.buttons[0].href}
+							onChange={(url) => handleButtonHrefChange(url, cardItem, index)}
 						/>
 					</PanelRow>
 					<PanelRow>
-						<MediaPlaceholder
-							icon="format-image"
-							labels={{ title: "Image", instructions: "Upload an image" }}
-							allowedTypes = { [ 'image' ] }
-							multiple = { false }
-							onSelect={(image) => handleCardImageSourceChange(image.url, cardItem, index)}
-							mediaPreview={mediaPreview}
+						<SelectControl
+							label={__("Button Color")}
+							value={cardItem.buttons[0].color}
+							options={[
+								{ label: "Maroon", value: "maroon" },
+								{ label: "Gold", value: "gold" },
+								{ label: "Gray", value: "gray" },
+								{ label: "Dark", value: "dark" },
+							]}
+							onChange={(color) => handleButtonColorChange(color, cardItem, index)}
 						/>
 					</PanelRow>
-					<PanelBody title={__("CTA Button")}>
-				<PanelRow>
-					<TextControl
-						label={__("Button Label")}
-						value={cardItem.buttons[0].label}
-						onChange={(label) => handleButtonLabelChange(label, cardItem, index)}
-					/>
-				</PanelRow>
-				<PanelRow>
-					<TextControl
-						label={__("Button URL")}
-						value={cardItem.buttons[0].href}
-						onChange={(url) => handleButtonHrefChange(url, cardItem, index)}
-					/>
-				</PanelRow>
-				<PanelRow>
-					<SelectControl
-						label={__("Button Color")}
-						value={cardItem.buttons[0].color}
-						options={[
-							{ label: "Maroon", value: "maroon" },
-							{ label: "Gold", value: "gold" },
-							{ label: "Gray", value: "gray" },
-							{ label: "Dark", value: "dark" },
-						]}
-						onChange={(color) => handleButtonColorChange(color, cardItem, index)}
-					/>
-				</PanelRow>
-				<PanelRow>
-					<SelectControl
-						label={__("Button Size")}
-						value={cardItem.buttons[0].size}
-						options={[
-							{ label: "Small", value: "small" },
-							{ label: "Default", value: "default" },
-							{ label: "X-Small", value: "xsmall" },
-						]}
-						onChange={(size) => handleButtonSizeChange(size, cardItem, index)}
-					/>
-				</PanelRow>
-				<PanelRow>
-					<TextControl
-						label={__("Button Aria Label")}
-						value={cardItem.buttons[0].ariaLabel}
-						onChange={(ariaLabel) => handleButtonAriaLabelChange(ariaLabel, cardItem, index)}
-					/>
-				</PanelRow>
-				<PanelRow>
-					<Button variant="secondary" size="small" onClick={(event) => handleRemoveButton(event, cardItem, index)}>
-						{__("Remove Button")}
-					</Button>
-				</PanelRow>
-				</PanelBody>
-				<PanelRow>
-					<Button variant="secondary" size="small" onClick={(event) => handleRemoveCard(event, index)}>
-						{__("Remove Card")}
-					</Button>
-				</PanelRow>
-				</PanelBody>
-			)
+					<PanelRow>
+						<SelectControl
+							label={__("Button Size")}
+							value={cardItem.buttons[0].size}
+							options={[
+								{ label: "Small", value: "small" },
+								{ label: "Default", value: "default" },
+								{ label: "X-Small", value: "xsmall" },
+							]}
+							onChange={(size) => handleButtonSizeChange(size, cardItem, index)}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<TextControl
+							label={__("Button Aria Label")}
+							value={cardItem.buttons[0].ariaLabel}
+							onChange={(ariaLabel) => handleButtonAriaLabelChange(ariaLabel, cardItem, index)}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<Button variant="secondary" size="small" onClick={(event) => handleRemoveButton(event, cardItem, index)}>
+							{__("Remove Button")}
+						</Button>
+					</PanelRow>
+					</PanelBody>
+					<PanelRow>
+						<Button variant="secondary" size="small" onClick={(event) => handleRemoveCard(event, index)}>
+							{__("Remove Card")}
+						</Button>
+					</PanelRow>
+					</PanelBody>
+				)
+			}
 		})
 	}
 
-  return (
+	return (
     <InspectorControls>
 			<PanelBody title={__("Carousel Settings")}>
 				<PanelRow>
@@ -252,16 +255,16 @@ const Inspector = (props) => {
 					/>
 				</PanelRow>
 			</PanelBody>
-      <PanelBody title={__("Carousel Cards")}>
+			<PanelBody title={__("Carousel Cards")}>
 				{cardItemFields}
-        <PanelRow>
-          <Button variant="primary" onClick={handleAddCard.bind(this)}>
-            {__("Add New Card")}
-          </Button>
-        </PanelRow>
-      </PanelBody>
+				<PanelRow>
+					<Button variant="primary" onClick={handleAddCard.bind(this)}>
+						{__("Add New Card")}
+					</Button>
+				</PanelRow>
+			</PanelBody>
     </InspectorControls>
-  )
+	)
 }
 
 export default Inspector
