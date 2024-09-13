@@ -29,6 +29,7 @@ function create_block_unity_carousels_block_init() {
 	register_block_type( __DIR__ . '/build/card-carousel' );
 	register_block_type( __DIR__ . '/build/image-carousel' );
 	register_block_type( __DIR__ . '/build/image-gallery-carousel' );
+	register_block_type( __DIR__ . '/build/testimonial-carousel' );
 }
 add_action( 'init', 'create_block_unity_carousels_block_init' );
 /**
