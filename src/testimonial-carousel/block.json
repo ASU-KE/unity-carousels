@@ -1,0 +1,51 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "unity-carousels/testimonial-carousel",
+  "version": "1.0.0",
+  "title": "Testimonial Carousel",
+  "category": "unity-carousels",
+  "icon": "format-quote",
+  "description": "Carousel that features quotes/testimonials.",
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "textdomain": "unity-carousels",
+	"viewScript": "file:./view.js",
+  "editorScript": "file:./index.js",
+  "attributes": {
+		"testimonialItems": {
+			"type": "array",
+			"default": []
+		},
+		"maxWidth": {
+			"type": "string",
+			"default": "500px"
+		},
+		"imageAutoSize": {
+			"type": "boolean",
+			"default": true
+		},
+		"hasNavButtons": {
+			"type": "boolean",
+			"default": true
+		},
+		"hasPositionIndicators": {
+			"type": "boolean",
+			"default": true
+		},
+		"containerCssClass": {
+			"type": "array",
+			"default": ["accent-gold"]
+		},
+		"titleCssClass": {
+			"type": "array",
+			"default": ["highlight-gold", "text-dark"]
+		},
+		"contentCssClass": {
+			"type": "array",
+			"default": ["text-maroon"]
+		}
+	}
+}
