@@ -2,7 +2,7 @@ import { __ } from "@wordpress/i18n"
 import { useBlockProps } from "@wordpress/block-editor"
 import { TestimonialCarousel } from "../../resources/asu-unity-stack/packages/component-carousel/src/components/TestimonialCarousel"
 import anonImg from "../../resources/asu-unity-stack/shared/assets/img/named/anon.png"
-//import Inspector from "./inspector"
+import Inspector from "./inspector"
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -96,6 +96,7 @@ export default function Edit(props) {
 	return (
 		<>
 		<div { ...blockProps }>
+			<Inspector { ...props } />
 			<TestimonialCarousel {...args} />
 		</div>
 		</>
