@@ -3,7 +3,7 @@ import { useBlockProps } from "@wordpress/block-editor"
 import { TestimonialCarousel } from "../../resources/asu-unity-stack/packages/component-carousel/src/components/TestimonialCarousel"
 import anonImg from "../../resources/asu-unity-stack/shared/assets/img/named/anon.png"
 import Inspector from "./inspector"
-
+import "./edit.scss"
 /**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
