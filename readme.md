@@ -16,15 +16,15 @@ Carousels built with glidejs, customized for the ASU Unity Design System.
 - Upload the plugin files to the `/wp-content/plugins/unity-carousels` directory, or install the compressed plugin flies through the WordPress plugins screen directly.
 - Activate the plugin through the 'Plugins' screen in WordPress
 
-### Development
+## Development
 
 - `.npmrc`: Add your `authToken` from Github to access the `@asu` package registry. Do not commit token.
 
-#### Install resources
+### Install resources
 
 - `npm i`: installs `wp-scripts`, the build tools to scaffold the block, and `glidejs` default resources available to copy into `/resources`.
 
-#### Install submodule resources
+### Install submodule resources
 
 There is a command in Git to clone both the top level project and all submodules.
 If a developer cloned directly from Github, submodule files will not have been pulled. To get the rest of the files:
@@ -32,14 +32,14 @@ If a developer cloned directly from Github, submodule files will not have been p
 - `git pull --recurse-submodules` pulls latest submodule files
 - `git submodule update --init` set submodule files to the main repo commit. Developers must track submodule commits in the main project, to keep compiling builds across team members in sync.
 
-#### glide.js ASU UDS styles
+### glide.js ASU UDS styles
 The ASU specific CSS styling is contained in `glide.theme.scss` in `@asu/asu-unity-stack/packages/component-carousel`. Currently that SCSS file needs to be compiled in the theme for the complete experience. The carousel is functional without this SCSS file.
 
-#### Update default glide.js assets
+### Update default glide.js assets
 - `npm i`
 - copy `glide.min.js` and `glide.core.min.css` to `resources/glidejs`
 
-#### Update resources folder: ASU Unity Stack carousel packages
+### Update resources folder: ASU Unity Stack carousel packages
 
 When an update for `component-carousel` from UDS is released, a developer can update the resources folder and build the new carousel.
 
@@ -50,6 +50,6 @@ When an update for `component-carousel` from UDS is released, a developer can up
 - Change directory back to the top level `unity-carousels project branch`, commit the submodule directory update ` modified:  resources/asu-unity-stack (modified content)`.
 - build latest
 
-### Changelog
-#### 1.0.0
+## Changelog
+### 1.0.0
 - Release
