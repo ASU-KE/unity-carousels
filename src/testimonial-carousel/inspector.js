@@ -1,7 +1,8 @@
 import { __ } from "@wordpress/i18n"
-import { InspectorControls, MediaPlaceholder } from "@wordpress/block-editor"
-import { Button, PanelBody, PanelRow, TextControl, TextareaControl, ToggleControl, SelectControl } from "@wordpress/components"
+import { InspectorControls } from "@wordpress/block-editor"
+import { Button, PanelBody, PanelRow, TextControl, ToggleControl, SelectControl } from "@wordpress/components"
 import anonImg from "../../resources/asu-unity-stack/shared/assets/img/named/anon.png"
+import TestimonialItem from "./components/testimonialItem"
 
 /**
  * Inspector controls
@@ -16,6 +17,10 @@ const Inspector = (props) => {
 		quote: {
 			title: "Walt Disney",
 			content:"Laughter is timeless, imagination has no age, dreams are forever.",
+			cite: {
+				name: "",
+				description: "",
+			},
 		},
 		imageSource: anonImg,
 		imageAltText: `image alt text`,
@@ -71,103 +76,16 @@ const Inspector = (props) => {
 			props.setAttributes( { testimonialItems: [ ...testimonialItems, testimonialCard ] } )
 		}
   }
-
-	const handleRemoveCard = (event, index) => {
-		const testimonialItems = [...props.attributes.testimonialItems]
-		let filteredCardItems = testimonialItems.filter((card) => card.id !== index)
-		filteredCardItems.forEach((card, i) => { card.id = i })
-		props.setAttributes({ testimonialItems: filteredCardItems })
-	}
-
-	function returnLast(arr) {
-		return arr.at(-1)
-	}
-
-	const handleCardHeaderChange = (text, cardItem, index) => {
-		const testimonialItems = [...props.attributes.testimonialItems]
-		let card = testimonialItems[index]
-		card.quote.title = text
-		props.setAttributes({ testimonialItems: testimonialItems })
-	}
-
-	const handleCardContentChange = (text, cardItem, index) => {
-		const testimonialItems = [...props.attributes.testimonialItems]
-		let card = testimonialItems[index]
-		card.quote.content = text
-		props.setAttributes({ testimonialItems: testimonialItems })
-	}
-
-	const handleCardImageSourceChange = (mediaUrl, cardItem, index) => {
-		const testimonialItems = [...props.attributes.testimonialItems]
-		let card = testimonialItems[index]
-		card.imageSource = mediaUrl
-		props.setAttributes({ testimonialItems: testimonialItems })
-	}
-
-	const handleCardImageAltTextChange = (altText, cardItem, index) => {
-		const testimonialItems = [...props.attributes.testimonialItems]
-		let card = testimonialItems[index]
-		card.imageAltText = altText
-		props.setAttributes({ testimonialItems: testimonialItems })
-	}
-
 	let cardItemFields
 
 	if (props.attributes.testimonialItems.length && props.attributes.testimonialItems[0].id !== 9999) {
 
 		cardItemFields = props.attributes.testimonialItems.map((cardItem, index) => {
 
-			if( cardItem.id < 9999 ) {
+			return (
+				<TestimonialItem cardItem={cardItem} index={index} props={props} />
+			)
 
-				const mediaPreview = !! cardItem.imageSource && (<img src={ cardItem.imageSource } />)
-
-				return (
-					<PanelBody title={`Card ${index+1}`} key={index}>
-						<PanelRow>
-							<TextControl
-								label="Header text"
-								className="card-header-text"
-								placeholder="Placeholder text"
-								value={cardItem.title}
-								onChange={(text) => handleCardHeaderChange(text, cardItem, index)}
-							/>
-						</PanelRow>
-						<PanelRow>
-							<TextareaControl
-								label="Content text"
-								className="card-content-text"
-								placeholder="Placeholder text"
-								value={cardItem.content}
-								onChange={(text) => handleCardContentChange(text, cardItem, index)}
-							/>
-						</PanelRow>
-						<PanelRow>
-							<MediaPlaceholder
-								icon="format-image"
-								labels={{ title: "Image", instructions: "Upload an image" }}
-								allowedTypes = { [ 'image' ] }
-								multiple = { false }
-								onSelect={(image) => handleCardImageSourceChange(image.url, cardItem, index)}
-								mediaPreview={mediaPreview}
-							/>
-						</PanelRow>
-						<PanelRow>
-							<TextControl
-								label="Image Alt Text"
-								className="card-image-alt-text"
-								placeholder="Placeholder text"
-								value={cardItem.imageAltText}
-								onChange={(text) => handleCardImageAltTextChange(text, cardItem, index)}
-							/>
-						</PanelRow>
-					<PanelRow>
-						<Button variant="secondary" size="small" onClick={(event) => handleRemoveCard(event, index)}>
-							{__("Remove Card")}
-						</Button>
-					</PanelRow>
-					</PanelBody>
-				)
-			}
 		})
 	}
 
