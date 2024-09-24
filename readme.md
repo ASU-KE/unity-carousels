@@ -51,5 +51,9 @@ When an update for `component-carousel` from UDS is released, a developer can up
 - build latest
 
 ## Changelog
+### 1.1.0
+- testimonial: add example  variations
+- testimonial: citation fields
+- testimonial: remove img button
 ### 1.0.0
 - Release
