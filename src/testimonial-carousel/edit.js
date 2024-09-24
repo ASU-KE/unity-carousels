@@ -32,43 +32,50 @@ export default function Edit(props) {
 		{
 			id: 9999,
 			quote: {
-				title: "Walt Disney",
-				content:
-					"Laughter is timeless, imagination has no age, dreams are forever.",
+			  title: "Walt Disney",
+			  content: "Testimonial No Citation example. Laughter is timeless, imagination has no age, dreams are forever.",
+			  cite: {
+				name: "",
+				description: "",
+			  },
 			},
 			imageSource: anonImg,
-			imageAltText: `image alt text`,
-		},
-		{
+			imageAltText: `Image of Walt Disney`,
+		  },
+		  {
 			id: 99999,
 			quote: {
-				title: "Anonymous",
-				content:
-					`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua eiusmod tempo.`,
+			  content: `Testimonial Citation No Image example. Computers make excellent and efficient servants, but I have no wish to serve under them.`,
+			  cite: {
+				name: `Spock`,
+				description: `First officer, USS Enterprise`,
+			  },
 			},
-			imageSource: null,
-			imageAltText: null
-		},
-		{
+		  },
+		  {
 			id: 999999,
 			quote: {
-				title: "Walt Disney",
-				content:
-					"Laughter is timeless, imagination has no age, dreams are forever.",
+			  content: `citeWithImage I used to wonder about that myself. Thought it was a bunch of mumbo-jumbo. A magical power holding together good and evil, the dark side and the light? Crazy thing is, it's true. The Force, the Jedi — all of it. It's all true.`,
+			  cite: {
+				name: `Han Solo`,
+			  },
 			},
 			imageSource: anonImg,
-			imageAltText: `image alt text`,
-		},
-		{
-			id: 99999999,
+			imageAltText: `Pretend this is Han Solo`,
+		  },
+		  {
+			id: 9999999,
 			quote: {
-				title: "Anonymous",
-				content:
-					`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua eiusmod tempo.`,
+			  title: `testing all fields`,
+			  content: `citeWithImageDesc Eight design aspirations guide the ongoing evolution of ASU as a New American University. These institutional objectives are integrated in innovative ways throughout the university to achieve excellence, access and impact.`,
+			  cite: {
+				name: `Michael M. Crow`,
+				description: `ASU Charter`,
+			  },
 			},
-			imageSource: null,
-			imageAltText: null
-		},
+			imageSource: anonImg,
+			imageAltText: `Pretend this is Michael M. Crow, President of ASU`,
+		  },
 	]
 
 	if (testimonialItems.length == 0 ) {
