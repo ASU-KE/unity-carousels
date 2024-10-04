@@ -24,13 +24,18 @@ Carousels built with glidejs, customized for the ASU Unity Design System.
 
 - `npm i`: installs `wp-scripts`, the build tools to scaffold the block, and `glidejs` default resources available to copy into `/resources`.
 
-### Install submodule resources
+### Clone submodule resources
 
 There is a command in Git to clone both the top level project and all submodules.
 If a developer cloned directly from Github, submodule files will not have been pulled. To get the rest of the files:
 
 - `git pull --recurse-submodules` pulls latest submodule files
 - `git submodule update --init` set submodule files to the main repo commit. Developers must track submodule commits in the main project, to keep compiling builds across team members in sync.
+
+### Install submodule package resources
+After cloning, the unity package being used needs dependencies installed.
+- `cd packages/component-carousel`
+- `npm i --legacy-peer-deps`
 
 ### glide.js ASU UDS styles
 The ASU specific CSS styling is contained in `glide.theme.scss` in `@asu/asu-unity-stack/packages/component-carousel`. Currently that SCSS file needs to be compiled in the theme for the complete experience. The carousel is functional without this SCSS file.
