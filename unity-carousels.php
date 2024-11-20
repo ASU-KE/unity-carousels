@@ -4,7 +4,7 @@
  * Description:       Carousels built with glidejs customized for UDS.
  * Requires at least: 6.2.0
  * Requires PHP:      7.4
- * Version:           1.1.0
+ * Version:           1.2.0
  * Author:            ASU KE Web Services
  * Author URI:        https://rto.asu.edu/web-services
  * License:           GPL-2.0-or-later
@@ -47,5 +47,8 @@ function unitycarousels_register_block_category($categories)
 }
 add_filter('block_categories_all', 'unitycarousels_register_block_category');
 
-wp_enqueue_script( 'unity-carousels-glidejs', '/wp-content/plugins/unity-carousels/resources/glidejs/glide.min.js', array(), '3.6.2', true );
-wp_enqueue_style('unity-carousels-glidejs-style', '/wp-content/plugins/unity-carousels/resources/glidejs/glide.core.min.css', array(), $version, 'all');
+function unity_carousels_scripts() {
+	wp_enqueue_script( 'unity-carousels-glidejs', '/wp-content/plugins/unity-carousels/resources/glidejs/glide.min.js', array(), '3.6.2', true );
+	wp_enqueue_style('unity-carousels-glidejs-style', '/wp-content/plugins/unity-carousels/resources/glidejs/glide.core.min.css', array(), '3.6.2', 'all');
+}
+add_action( 'wp_enqueue_scripts', 'unity_carousels_scripts' );
