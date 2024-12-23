@@ -2,7 +2,7 @@
 
  - Contributors:      ASU KE Web Services
  - Tested up to:      6.6.2
- - Stable tag:        v1.2.0
+ - Stable tag:        v1.3.0
  - License:           GPL-2.0-or-later
  - License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,6 +56,11 @@ When an update for `component-carousel` from UDS is released, a developer can up
 - build latest
 
 ## Changelog
+### 1.3.0
+- component-carousel v2.4.0
+### 1.2.0
+- `add_action()` for scripts
+- component-carousel v2.1.1
 ### 1.1.0
 - testimonial: add example  variations
 - testimonial: citation fields
